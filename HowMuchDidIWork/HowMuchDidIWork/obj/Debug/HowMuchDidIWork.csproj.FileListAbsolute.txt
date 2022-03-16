@@ -1,0 +1,11 @@
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\bin\Debug\HowMuchDidIWork.exe.config
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\bin\Debug\HowMuchDidIWork.exe
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\bin\Debug\HowMuchDidIWork.pdb
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.AssemblyReference.cache
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.SuggestedBindingRedirects.cache
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.Form1.resources
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.Properties.Resources.resources
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.GenerateResource.cache
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.CoreCompileInputs.cache
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.exe
+C:\Users\Kim\source\repos\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.pdb
