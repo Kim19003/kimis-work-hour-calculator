@@ -34,5 +34,41 @@ namespace HowMuchDidIWork.Properties {
                 this["Location"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StartTimeText {
+            get {
+                return ((string)(this["StartTimeText"]));
+            }
+            set {
+                this["StartTimeText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EndTimeText {
+            get {
+                return ((string)(this["EndTimeText"]));
+            }
+            set {
+                this["EndTimeText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DescriptionText {
+            get {
+                return ((string)(this["DescriptionText"]));
+            }
+            set {
+                this["DescriptionText"] = value;
+            }
+        }
     }
 }

@@ -21,6 +21,9 @@ namespace HowMuchDidIWork
         private void Form_Load(object sender, EventArgs e)
         {
             Location = new Point(Properties.Settings.Default.Location.X, Properties.Settings.Default.Location.Y);
+            taskStartTimeTextBox.Text = Properties.Settings.Default.StartTimeText;
+            taskEndTimeTextBox.Text = Properties.Settings.Default.EndTimeText;
+            taskDescriptionTextBox.Text = Properties.Settings.Default.DescriptionText;
 
             UpdateTaskDisplayWithFileData();
         }
@@ -28,6 +31,10 @@ namespace HowMuchDidIWork
         private void Form_Closing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.Location = Location;
+            Properties.Settings.Default.StartTimeText = taskStartTimeTextBox.Text;
+            Properties.Settings.Default.EndTimeText = taskEndTimeTextBox.Text;
+            Properties.Settings.Default.DescriptionText = taskDescriptionTextBox.Text;
+
             Properties.Settings.Default.Save();
         }
 
