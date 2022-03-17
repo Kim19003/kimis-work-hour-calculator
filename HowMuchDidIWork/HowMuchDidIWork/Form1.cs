@@ -7,15 +7,24 @@ namespace HowMuchDidIWork
 {
     public partial class Form1 : Form
     {
-        readonly string appName = "Kimin työpäivälaskuri";
+        readonly string appName = "Kimin työtuntilaskuri";
 
         readonly string tasksFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Tehtävät.txt");
+
+        private int ticks = 0;
+
+        Color infoLabelAlertNormalForeColor = Color.Blue,
+            infoLabelAlertNormalBackColor = Color.Transparent;
+        Color infoLabelAlertErrorForeColor = Color.Red,
+            infoLabelAlertErrorBackColor = Color.Transparent;
 
         public Form1()
         {
             InitializeComponent();
 
             MaximizeBox = false;
+
+            console.Size = new Size(512, 506);
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -24,6 +33,8 @@ namespace HowMuchDidIWork
             taskStartTimeTextBox.Text = Properties.Settings.Default.StartTimeText;
             taskEndTimeTextBox.Text = Properties.Settings.Default.EndTimeText;
             taskDescriptionTextBox.Text = Properties.Settings.Default.DescriptionText;
+
+            ResetDisplayInfo();
 
             UpdateTaskDisplayWithFileData();
         }
@@ -40,11 +51,21 @@ namespace HowMuchDidIWork
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F5)
+            switch (e.KeyCode)
             {
-                UpdateTaskDisplayWithFileData();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
+                case Keys.F5:
+                    UpdateTaskDisplayWithFileData();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    break;
+                case Keys.F10:
+                    if (!console.Visible)
+                        console.Visible = true;
+                    else
+                        console.Visible = false;
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    break;
             }
         }
 
@@ -75,31 +96,25 @@ namespace HowMuchDidIWork
 
         private double? ConvertToTimeAndCalculateTotalTime(string startTime, string endTime)
         {
-            double startHours, startMinutes, endHours, endMinutes;
+            Time sTime, eTime;
             
             try
             {
-                startHours = double.Parse(startTime.Substring(0, startTime.IndexOf(':')));
-                startMinutes = double.Parse(startTime.Substring(startTime.IndexOf(':') + 1));
+                int startHours = int.Parse(startTime.Substring(0, startTime.IndexOf(':'))), startMinutes = int.Parse(startTime.Substring(startTime.IndexOf(':') + 1));
+                int endHours = int.Parse(endTime.Substring(0, endTime.IndexOf(':'))), endMinutes = int.Parse(endTime.Substring(endTime.IndexOf(':') + 1));
 
-                endHours = double.Parse(endTime.Substring(0, endTime.IndexOf(':')));
-                endMinutes = double.Parse(endTime.Substring(endTime.IndexOf(':') + 1));
-
-                if (startMinutes < 0 || startMinutes > 59 || endMinutes < 0 || endMinutes > 59)
+                if (startHours > 23 || startHours < 1 || endHours > 23 || endHours < 1 ||
+                    startMinutes > 59 || startMinutes < 0 || endMinutes > 59 || endMinutes < 0)
                 {
-                    return null;
+                    throw new Exception("Hours can't be over 23 and less than 1, and minutes can't be over than 59 and less than 0");
                 }
 
-                string overallTimeString = ((endHours + (endMinutes / 100.0)) - (startHours + (startMinutes / 100.0))).ToString().Replace(',', ':');
+                sTime = new Time(startHours, startMinutes);
+                eTime = new Time(endHours, endMinutes);
 
-                double overallHours = !overallTimeString.Contains(":") ? double.Parse(overallTimeString) :
-                    double.Parse(overallTimeString.Substring(0, overallTimeString.IndexOf(':')));
+                eTime.RemoveTime(sTime);
 
-                double _overallMinutes = !overallTimeString.Contains(":") ? 0 : double.Parse(overallTimeString.Substring(overallTimeString.IndexOf(':') + 1)),
-                    overallMinutes = (_overallMinutes > 0 && _overallMinutes < 11 || _overallMinutes == 20 || _overallMinutes == 30 ||
-                    _overallMinutes == 40 || _overallMinutes == 50) ? _overallMinutes * 10 : _overallMinutes;
-
-                return Math.Round(overallHours + 10.0 / (60.0 / overallMinutes) / 10.0, 2);
+                return Math.Round((double)eTime.Hour + 10.0 / (60.0 / (double)eTime.Minute) / 10.0, 2);
             }
             catch
             {
@@ -111,23 +126,17 @@ namespace HowMuchDidIWork
 
         private void UpdateTasksFile(string content)
         {
-            ClearDisplayInfoIfShowing();
-
             File.WriteAllText(tasksFilePath, content);
         }
 
         private void ClearTasksFileAndTaskDisplay()
         {
-            ClearDisplayInfoIfShowing();
-
             File.WriteAllText(tasksFilePath, "");
             tasksDisplayRichTextBox.Text = "";
         }
 
         private void UpdateTasksDisplayWithTask(string taskFormat)
         {
-            ClearDisplayInfoIfShowing();
-
             if (!string.IsNullOrEmpty(taskFormat))
             {
                 tasksDisplayRichTextBox.Text += taskFormat + "\n";
@@ -136,8 +145,6 @@ namespace HowMuchDidIWork
 
         private void UpdateTaskDisplayWithFileData()
         {
-            ClearDisplayInfoIfShowing();
-
             if (File.Exists(tasksFilePath))
             {
                 tasksDisplayRichTextBox.Text = ReadFromTasksFile();
@@ -161,8 +168,6 @@ namespace HowMuchDidIWork
 
         private void taskDescriptionTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            ClearDisplayInfoIfShowing();
-
             if (e.KeyCode == Keys.Enter)
             {
                 MakeNewTask(taskStartTimeTextBox.Text, taskEndTimeTextBox.Text, taskDescriptionTextBox.Text);
@@ -173,31 +178,35 @@ namespace HowMuchDidIWork
 
         private void tasksDisplayRichTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            ClearDisplayInfoIfShowing();
-
-            if (e.KeyCode == Keys.Enter)
+            switch (e.KeyCode)
             {
-                UpdateTasksFile(ReadTaskDisplayData()); // Tähän MessageBox tai jokin muu ratkaisu?
-                DisplayInfo("Päivitit onnistuneesti tekemäsi muutokset tiedostoon", InfoType.Normal);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
+                case Keys.Enter:
+                    UpdateTasksFile(ReadTaskDisplayData()); // Tähän MessageBox tai jokin muu ratkaisu?
+                    DisplayInfo("Päivitit onnistuneesti tekemäsi muutokset tiedostoon", InfoType.Normal);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    break;
+                case Keys.F10:
+                    if (!console.Visible)
+                        console.Visible = true;
+                    else
+                        console.Visible = false;
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    break;
             }
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
         {
-            ClearDisplayInfoIfShowing();
-
             MakeNewTask(taskStartTimeTextBox.Text, taskEndTimeTextBox.Text, taskDescriptionTextBox.Text);
         }
 
         private void resetCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            ClearDisplayInfoIfShowing();
-
             if (resetCheckBox.Checked)
             {
-                if (MessageBox.Show("Oletko varma, että haluat pyyhkiä tehtävähistorian?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Oletko varma, että haluat pyyhkiä historian (tiedosto myös pyyhitään)?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     ClearTasksFileAndTaskDisplay();
 
@@ -213,31 +222,122 @@ namespace HowMuchDidIWork
             switch (infoType)
             {
                 case InfoType.Normal:
+                    StartTimer();
                     infoLabel.Text = info;
-                    infoLabel.ForeColor = SystemColors.WindowText;
-                    infoLabel.BackColor = Color.NavajoWhite;
+                    infoLabel.ForeColor = infoLabelAlertNormalForeColor;
+                    infoLabel.BackColor = infoLabelAlertNormalBackColor;
                     break;
                 case InfoType.Error:
+                    StartTimer();
                     infoLabel.Text = info;
-                    infoLabel.ForeColor = Color.Red;
-                    infoLabel.BackColor = Color.NavajoWhite;
+                    infoLabel.ForeColor = infoLabelAlertErrorForeColor;
+                    infoLabel.BackColor = infoLabelAlertErrorBackColor;
                     break;
-            }
-        }
-
-        private void ClearDisplayInfoIfShowing()
-        {
-            if (infoLabel.Text.Length > 0)
-            {
-                ResetDisplayInfo();
             }
         }
 
         private void ResetDisplayInfo()
         {
             infoLabel.Text = "";
-            infoLabel.ForeColor = SystemColors.WindowText;
+            infoLabel.ForeColor = infoLabelAlertNormalForeColor;
             infoLabel.BackColor = Color.Transparent;
+        }
+
+        private void console_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    NewConsoleCommandLine(ReadConsoleLine());
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    break;
+                case Keys.F10:
+                    if (!console.Visible)
+                        console.Visible = true;
+                    else
+                        console.Visible = false;
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    break;
+            }
+        }
+
+        private void StartTimer()
+        {
+            if (ticks > 0)
+            {
+                timer1.Stop();
+
+                ticks = 0;
+            }
+
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            ticks++;
+
+            if (ticks == 5) // Seconds
+            {
+                ResetDisplayInfo();
+
+                timer1.Stop();
+
+                ticks = 0;
+            }
+        }
+
+        private void startedNowButton_Click(object sender, EventArgs e)
+        {
+            taskStartTimeTextBox.Text = DateTime.Now.ToString("H:mm").Replace(".", ":");
+        }
+
+        private void endedNowButton_Click(object sender, EventArgs e)
+        {
+            taskEndTimeTextBox.Text = DateTime.Now.ToString("H:mm").Replace(".", ":");
+        }
+
+        private void switchTimesButton_Click(object sender, EventArgs e)
+        {
+            string startTimeText = taskStartTimeTextBox.Text;
+            string endTimeText = taskEndTimeTextBox.Text;
+
+            taskStartTimeTextBox.Text = endTimeText;
+            taskEndTimeTextBox.Text = startTimeText;
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Oletko varma, että haluat pyyhkiä syötelaatikot?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                taskStartTimeTextBox.Text = "";
+                taskEndTimeTextBox.Text = "";
+                taskDescriptionTextBox.Text = "";
+            }
+        }
+
+        private void NewConsoleCommandLine(string line)
+        {
+            switch (line)
+            {
+                case "quit":
+                    Environment.Exit(0);
+                    break;
+            }
+        }
+
+        private string ReadConsoleLine()
+        {
+            string[] consoleLines = console.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+
+            if (consoleLines.Length > 0)
+            {
+                return consoleLines[consoleLines.Length - 1];
+            }
+
+            return "";
         }
     }
 }

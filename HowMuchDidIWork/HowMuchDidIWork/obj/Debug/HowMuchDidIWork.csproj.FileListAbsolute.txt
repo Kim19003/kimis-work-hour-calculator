@@ -20,3 +20,14 @@ C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\HowMuchDidIWork\HowMuchDidIWork\ob
 C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.CoreCompileInputs.cache
 C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.exe
 C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.pdb
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\bin\Debug\HowMuchDidIWork.exe.config
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\bin\Debug\HowMuchDidIWork.exe
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\bin\Debug\HowMuchDidIWork.pdb
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.AssemblyReference.cache
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.SuggestedBindingRedirects.cache
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.Form1.resources
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.Properties.Resources.resources
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.GenerateResource.cache
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.csproj.CoreCompileInputs.cache
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.exe
+D:\stuff\- GITHUB -\tpls\tpls\HowMuchDidIWork\HowMuchDidIWork\obj\Debug\HowMuchDidIWork.pdb
