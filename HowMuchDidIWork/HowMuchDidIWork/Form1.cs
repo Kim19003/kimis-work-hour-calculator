@@ -13,9 +13,9 @@ namespace HowMuchDidIWork
 
         private int ticks = 0;
 
-        Color infoLabelAlertNormalForeColor = Color.Blue,
+        private readonly Color infoLabelAlertNormalForeColor = Color.Blue,
             infoLabelAlertNormalBackColor = Color.Transparent;
-        Color infoLabelAlertErrorForeColor = Color.Red,
+        private readonly Color infoLabelAlertErrorForeColor = Color.Red,
             infoLabelAlertErrorBackColor = Color.Transparent;
 
         public Form1()
@@ -82,6 +82,10 @@ namespace HowMuchDidIWork
                     UpdateTasksDisplayWithTask(taskFormat);
 
                     UpdateTasksFile(ReadTaskDisplayData());
+
+                    taskStartTimeTextBox.Text = taskEndTimeTextBox.Text;
+                    taskEndTimeTextBox.Text = "";
+                    taskDescriptionTextBox.Text = "";
                 }
                 else
                 {
@@ -212,9 +216,9 @@ namespace HowMuchDidIWork
 
                     DisplayInfo("Pyyhit onnistuneesti tehtävähistoriasi", InfoType.Normal);
                 }
-
-                resetCheckBox.Checked = false;
             }
+
+            resetCheckBox.Checked = false;
         }
 
         private void DisplayInfo(string info, InfoType infoType) // Tätä voisi kehittää myöhemmin eteenpäin?
@@ -316,6 +320,23 @@ namespace HowMuchDidIWork
                 taskEndTimeTextBox.Text = "";
                 taskDescriptionTextBox.Text = "";
             }
+        }
+
+        private void resetAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (resetAllCheckBox.Checked)
+            {
+                if (MessageBox.Show("Oletko varma, että haluat pyyhkiä kaiken?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    taskStartTimeTextBox.Text = "";
+                    taskEndTimeTextBox.Text = "";
+                    taskDescriptionTextBox.Text = "";
+
+                    ClearTasksFileAndTaskDisplay();
+                }
+            }
+
+            resetAllCheckBox.Checked = false;
         }
 
         private void NewConsoleCommandLine(string line)

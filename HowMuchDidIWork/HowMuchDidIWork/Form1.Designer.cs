@@ -34,6 +34,10 @@
             this.taskEndTimeTextBox = new System.Windows.Forms.TextBox();
             this.isolatorLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.switchTimesButton = new System.Windows.Forms.Button();
+            this.endedNowButton = new System.Windows.Forms.Button();
+            this.startedNowButton = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
             this.resetCheckBox = new System.Windows.Forms.CheckBox();
             this.tasksDisplayRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -41,11 +45,8 @@
             this.taskDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.console = new System.Windows.Forms.RichTextBox();
-            this.startedNowButton = new System.Windows.Forms.Button();
-            this.endedNowButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.switchTimesButton = new System.Windows.Forms.Button();
-            this.clearButton = new System.Windows.Forms.Button();
+            this.resetAllCheckBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.resetAllCheckBox);
             this.panel1.Controls.Add(this.clearButton);
             this.panel1.Controls.Add(this.switchTimesButton);
             this.panel1.Controls.Add(this.endedNowButton);
@@ -99,6 +101,58 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(458, 437);
             this.panel1.TabIndex = 3;
+            // 
+            // clearButton
+            // 
+            this.clearButton.BackColor = System.Drawing.SystemColors.Window;
+            this.clearButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clearButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearButton.Location = new System.Drawing.Point(315, 155);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(39, 26);
+            this.clearButton.TabIndex = 9;
+            this.clearButton.Text = "Del";
+            this.clearButton.UseVisualStyleBackColor = false;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
+            // switchTimesButton
+            // 
+            this.switchTimesButton.BackColor = System.Drawing.SystemColors.Window;
+            this.switchTimesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.switchTimesButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.switchTimesButton.Location = new System.Drawing.Point(270, 155);
+            this.switchTimesButton.Name = "switchTimesButton";
+            this.switchTimesButton.Size = new System.Drawing.Size(39, 26);
+            this.switchTimesButton.TabIndex = 8;
+            this.switchTimesButton.Text = "<->";
+            this.switchTimesButton.UseVisualStyleBackColor = false;
+            this.switchTimesButton.Click += new System.EventHandler(this.switchTimesButton_Click);
+            // 
+            // endedNowButton
+            // 
+            this.endedNowButton.BackColor = System.Drawing.SystemColors.Window;
+            this.endedNowButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.endedNowButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endedNowButton.Location = new System.Drawing.Point(315, 63);
+            this.endedNowButton.Name = "endedNowButton";
+            this.endedNowButton.Size = new System.Drawing.Size(45, 26);
+            this.endedNowButton.TabIndex = 3;
+            this.endedNowButton.Text = "Nyt?";
+            this.endedNowButton.UseVisualStyleBackColor = false;
+            this.endedNowButton.Click += new System.EventHandler(this.endedNowButton_Click);
+            // 
+            // startedNowButton
+            // 
+            this.startedNowButton.BackColor = System.Drawing.SystemColors.Window;
+            this.startedNowButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.startedNowButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startedNowButton.Location = new System.Drawing.Point(99, 63);
+            this.startedNowButton.Name = "startedNowButton";
+            this.startedNowButton.Size = new System.Drawing.Size(45, 26);
+            this.startedNowButton.TabIndex = 1;
+            this.startedNowButton.Text = "Nyt?";
+            this.startedNowButton.UseVisualStyleBackColor = false;
+            this.startedNowButton.Click += new System.EventHandler(this.startedNowButton_Click);
             // 
             // infoLabel
             // 
@@ -181,32 +235,6 @@
             this.console.WordWrap = false;
             this.console.KeyDown += new System.Windows.Forms.KeyEventHandler(this.console_KeyDown);
             // 
-            // startedNowButton
-            // 
-            this.startedNowButton.BackColor = System.Drawing.SystemColors.Window;
-            this.startedNowButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.startedNowButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startedNowButton.Location = new System.Drawing.Point(99, 63);
-            this.startedNowButton.Name = "startedNowButton";
-            this.startedNowButton.Size = new System.Drawing.Size(45, 26);
-            this.startedNowButton.TabIndex = 1;
-            this.startedNowButton.Text = "Nyt?";
-            this.startedNowButton.UseVisualStyleBackColor = false;
-            this.startedNowButton.Click += new System.EventHandler(this.startedNowButton_Click);
-            // 
-            // endedNowButton
-            // 
-            this.endedNowButton.BackColor = System.Drawing.SystemColors.Window;
-            this.endedNowButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.endedNowButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endedNowButton.Location = new System.Drawing.Point(315, 63);
-            this.endedNowButton.Name = "endedNowButton";
-            this.endedNowButton.Size = new System.Drawing.Size(45, 26);
-            this.endedNowButton.TabIndex = 3;
-            this.endedNowButton.Text = "Nyt?";
-            this.endedNowButton.UseVisualStyleBackColor = false;
-            this.endedNowButton.Click += new System.EventHandler(this.endedNowButton_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::HowMuchDidIWork.Properties.Resources.kimin_työtuntilaskuri;
@@ -217,31 +245,18 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // switchTimesButton
+            // resetAllCheckBox
             // 
-            this.switchTimesButton.BackColor = System.Drawing.SystemColors.Window;
-            this.switchTimesButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.switchTimesButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.switchTimesButton.Location = new System.Drawing.Point(270, 155);
-            this.switchTimesButton.Name = "switchTimesButton";
-            this.switchTimesButton.Size = new System.Drawing.Size(39, 26);
-            this.switchTimesButton.TabIndex = 8;
-            this.switchTimesButton.Text = "<->";
-            this.switchTimesButton.UseVisualStyleBackColor = false;
-            this.switchTimesButton.Click += new System.EventHandler(this.switchTimesButton_Click);
-            // 
-            // clearButton
-            // 
-            this.clearButton.BackColor = System.Drawing.SystemColors.Window;
-            this.clearButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clearButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.Location = new System.Drawing.Point(315, 155);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(39, 26);
-            this.clearButton.TabIndex = 9;
-            this.clearButton.Text = "Del";
-            this.clearButton.UseVisualStyleBackColor = false;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.resetAllCheckBox.AutoSize = true;
+            this.resetAllCheckBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.resetAllCheckBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetAllCheckBox.Location = new System.Drawing.Point(122, 399);
+            this.resetAllCheckBox.Name = "resetAllCheckBox";
+            this.resetAllCheckBox.Size = new System.Drawing.Size(101, 21);
+            this.resetAllCheckBox.TabIndex = 10;
+            this.resetAllCheckBox.Text = "Pyyhi kaikki";
+            this.resetAllCheckBox.UseVisualStyleBackColor = true;
+            this.resetAllCheckBox.CheckedChanged += new System.EventHandler(this.resetAllCheckBox_CheckedChanged);
             // 
             // Form1
             // 
@@ -284,6 +299,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button switchTimesButton;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.CheckBox resetAllCheckBox;
     }
 }
 
