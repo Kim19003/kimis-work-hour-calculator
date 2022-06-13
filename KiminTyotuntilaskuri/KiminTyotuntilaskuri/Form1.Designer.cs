@@ -34,21 +34,21 @@
             this.taskEndTimeTextBox = new System.Windows.Forms.TextBox();
             this.isolatorLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.overallHoursValueLabel = new System.Windows.Forms.Label();
+            this.overallHoursTextLabel = new System.Windows.Forms.Label();
             this.resetAllCheckBox = new System.Windows.Forms.CheckBox();
             this.clearButton = new System.Windows.Forms.Button();
             this.switchTimesButton = new System.Windows.Forms.Button();
             this.endedNowButton = new System.Windows.Forms.Button();
             this.startedNowButton = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
-            this.resetCheckBox = new System.Windows.Forms.CheckBox();
+            this.startNewDayCheckBox = new System.Windows.Forms.CheckBox();
             this.tasksDisplayRichTextBox = new System.Windows.Forms.RichTextBox();
             this.addTaskButton = new System.Windows.Forms.Button();
             this.taskDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.console = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.overallHoursTextLabel = new System.Windows.Forms.Label();
-            this.overallHoursValueLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +56,7 @@
             // taskStartTimeTextBox
             // 
             this.taskStartTimeTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.taskStartTimeTextBox.Location = new System.Drawing.Point(150, 63);
+            this.taskStartTimeTextBox.Location = new System.Drawing.Point(149, 50);
             this.taskStartTimeTextBox.MaxLength = 5;
             this.taskStartTimeTextBox.Name = "taskStartTimeTextBox";
             this.taskStartTimeTextBox.Size = new System.Drawing.Size(66, 26);
@@ -66,7 +66,7 @@
             // taskEndTimeTextBox
             // 
             this.taskEndTimeTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.taskEndTimeTextBox.Location = new System.Drawing.Point(243, 63);
+            this.taskEndTimeTextBox.Location = new System.Drawing.Point(242, 50);
             this.taskEndTimeTextBox.MaxLength = 5;
             this.taskEndTimeTextBox.Name = "taskEndTimeTextBox";
             this.taskEndTimeTextBox.Size = new System.Drawing.Size(66, 26);
@@ -78,7 +78,7 @@
             this.isolatorLabel.AutoSize = true;
             this.isolatorLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.isolatorLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.isolatorLabel.Location = new System.Drawing.Point(223, 65);
+            this.isolatorLabel.Location = new System.Drawing.Point(222, 52);
             this.isolatorLabel.Name = "isolatorLabel";
             this.isolatorLabel.Size = new System.Drawing.Size(16, 22);
             this.isolatorLabel.TabIndex = 2;
@@ -94,7 +94,7 @@
             this.panel1.Controls.Add(this.endedNowButton);
             this.panel1.Controls.Add(this.startedNowButton);
             this.panel1.Controls.Add(this.infoLabel);
-            this.panel1.Controls.Add(this.resetCheckBox);
+            this.panel1.Controls.Add(this.startNewDayCheckBox);
             this.panel1.Controls.Add(this.tasksDisplayRichTextBox);
             this.panel1.Controls.Add(this.addTaskButton);
             this.panel1.Controls.Add(this.taskDescriptionTextBox);
@@ -106,16 +106,36 @@
             this.panel1.Size = new System.Drawing.Size(458, 437);
             this.panel1.TabIndex = 3;
             // 
+            // overallHoursValueLabel
+            // 
+            this.overallHoursValueLabel.AutoSize = true;
+            this.overallHoursValueLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overallHoursValueLabel.Location = new System.Drawing.Point(413, 400);
+            this.overallHoursValueLabel.Name = "overallHoursValueLabel";
+            this.overallHoursValueLabel.Size = new System.Drawing.Size(16, 17);
+            this.overallHoursValueLabel.TabIndex = 12;
+            this.overallHoursValueLabel.Text = "0";
+            // 
+            // overallHoursTextLabel
+            // 
+            this.overallHoursTextLabel.AutoSize = true;
+            this.overallHoursTextLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overallHoursTextLabel.Location = new System.Drawing.Point(294, 400);
+            this.overallHoursTextLabel.Name = "overallHoursTextLabel";
+            this.overallHoursTextLabel.Size = new System.Drawing.Size(122, 17);
+            this.overallHoursTextLabel.TabIndex = 11;
+            this.overallHoursTextLabel.Text = "Tunteja yhteensä:";
+            // 
             // resetAllCheckBox
             // 
             this.resetAllCheckBox.AutoSize = true;
             this.resetAllCheckBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.resetAllCheckBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetAllCheckBox.Location = new System.Drawing.Point(122, 399);
+            this.resetAllCheckBox.Location = new System.Drawing.Point(318, 196);
             this.resetAllCheckBox.Name = "resetAllCheckBox";
-            this.resetAllCheckBox.Size = new System.Drawing.Size(101, 21);
+            this.resetAllCheckBox.Size = new System.Drawing.Size(137, 21);
             this.resetAllCheckBox.TabIndex = 10;
-            this.resetAllCheckBox.Text = "Pyyhi kaikki";
+            this.resetAllCheckBox.Text = "Pyyhi kaikki arvot";
             this.resetAllCheckBox.UseVisualStyleBackColor = true;
             this.resetAllCheckBox.CheckedChanged += new System.EventHandler(this.resetAllCheckBox_CheckedChanged);
             // 
@@ -124,7 +144,7 @@
             this.clearButton.BackColor = System.Drawing.SystemColors.Window;
             this.clearButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearButton.Location = new System.Drawing.Point(315, 155);
+            this.clearButton.Location = new System.Drawing.Point(314, 142);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(39, 26);
             this.clearButton.TabIndex = 9;
@@ -137,7 +157,7 @@
             this.switchTimesButton.BackColor = System.Drawing.SystemColors.Window;
             this.switchTimesButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.switchTimesButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.switchTimesButton.Location = new System.Drawing.Point(270, 155);
+            this.switchTimesButton.Location = new System.Drawing.Point(269, 142);
             this.switchTimesButton.Name = "switchTimesButton";
             this.switchTimesButton.Size = new System.Drawing.Size(39, 26);
             this.switchTimesButton.TabIndex = 8;
@@ -150,7 +170,7 @@
             this.endedNowButton.BackColor = System.Drawing.SystemColors.Window;
             this.endedNowButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.endedNowButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endedNowButton.Location = new System.Drawing.Point(315, 63);
+            this.endedNowButton.Location = new System.Drawing.Point(314, 50);
             this.endedNowButton.Name = "endedNowButton";
             this.endedNowButton.Size = new System.Drawing.Size(45, 26);
             this.endedNowButton.TabIndex = 3;
@@ -163,7 +183,7 @@
             this.startedNowButton.BackColor = System.Drawing.SystemColors.Window;
             this.startedNowButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.startedNowButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startedNowButton.Location = new System.Drawing.Point(99, 63);
+            this.startedNowButton.Location = new System.Drawing.Point(98, 50);
             this.startedNowButton.Name = "startedNowButton";
             this.startedNowButton.Size = new System.Drawing.Size(45, 26);
             this.startedNowButton.TabIndex = 1;
@@ -183,18 +203,18 @@
             this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.infoLabel.Visible = false;
             // 
-            // resetCheckBox
+            // startNewDayCheckBox
             // 
-            this.resetCheckBox.AutoSize = true;
-            this.resetCheckBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.resetCheckBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetCheckBox.Location = new System.Drawing.Point(3, 399);
-            this.resetCheckBox.Name = "resetCheckBox";
-            this.resetCheckBox.Size = new System.Drawing.Size(113, 21);
-            this.resetCheckBox.TabIndex = 7;
-            this.resetCheckBox.Text = "Pyyhi historia";
-            this.resetCheckBox.UseVisualStyleBackColor = true;
-            this.resetCheckBox.CheckedChanged += new System.EventHandler(this.resetCheckBox_CheckedChanged);
+            this.startNewDayCheckBox.AutoSize = true;
+            this.startNewDayCheckBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.startNewDayCheckBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startNewDayCheckBox.Location = new System.Drawing.Point(3, 399);
+            this.startNewDayCheckBox.Name = "startNewDayCheckBox";
+            this.startNewDayCheckBox.Size = new System.Drawing.Size(142, 22);
+            this.startNewDayCheckBox.TabIndex = 7;
+            this.startNewDayCheckBox.Text = "Aloita uusi päivä";
+            this.startNewDayCheckBox.UseVisualStyleBackColor = true;
+            this.startNewDayCheckBox.CheckedChanged += new System.EventHandler(this.startNewDayCheckBox_CheckedChanged);
             // 
             // tasksDisplayRichTextBox
             // 
@@ -212,7 +232,7 @@
             this.addTaskButton.BackColor = System.Drawing.SystemColors.Window;
             this.addTaskButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addTaskButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addTaskButton.Location = new System.Drawing.Point(105, 155);
+            this.addTaskButton.Location = new System.Drawing.Point(104, 142);
             this.addTaskButton.Name = "addTaskButton";
             this.addTaskButton.Size = new System.Drawing.Size(159, 26);
             this.addTaskButton.TabIndex = 5;
@@ -223,7 +243,7 @@
             // taskDescriptionTextBox
             // 
             this.taskDescriptionTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.taskDescriptionTextBox.Location = new System.Drawing.Point(60, 107);
+            this.taskDescriptionTextBox.Location = new System.Drawing.Point(59, 94);
             this.taskDescriptionTextBox.MaxLength = 60;
             this.taskDescriptionTextBox.Name = "taskDescriptionTextBox";
             this.taskDescriptionTextBox.Size = new System.Drawing.Size(338, 26);
@@ -262,26 +282,6 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // overallHoursTextLabel
-            // 
-            this.overallHoursTextLabel.AutoSize = true;
-            this.overallHoursTextLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.overallHoursTextLabel.Location = new System.Drawing.Point(339, 400);
-            this.overallHoursTextLabel.Name = "overallHoursTextLabel";
-            this.overallHoursTextLabel.Size = new System.Drawing.Size(73, 17);
-            this.overallHoursTextLabel.TabIndex = 11;
-            this.overallHoursTextLabel.Text = "Yhteensä:";
-            // 
-            // overallHoursValueLabel
-            // 
-            this.overallHoursValueLabel.AutoSize = true;
-            this.overallHoursValueLabel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.overallHoursValueLabel.Location = new System.Drawing.Point(408, 400);
-            this.overallHoursValueLabel.Name = "overallHoursValueLabel";
-            this.overallHoursValueLabel.Size = new System.Drawing.Size(24, 17);
-            this.overallHoursValueLabel.TabIndex = 12;
-            this.overallHoursValueLabel.Text = "0h";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,7 +314,7 @@
         private System.Windows.Forms.TextBox taskDescriptionTextBox;
         private System.Windows.Forms.Button addTaskButton;
         private System.Windows.Forms.RichTextBox tasksDisplayRichTextBox;
-        private System.Windows.Forms.CheckBox resetCheckBox;
+        private System.Windows.Forms.CheckBox startNewDayCheckBox;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox console;

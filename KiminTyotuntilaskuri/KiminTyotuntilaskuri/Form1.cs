@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Media;
 using System.Windows.Forms;
 
 namespace HowMuchDidIWork
@@ -9,7 +10,9 @@ namespace HowMuchDidIWork
     {
         readonly string appName = "Kimin työtuntilaskuri";
 
-        readonly string tasksFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Tehtävät.txt");
+        readonly string tasksFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + @"\Tehtävät\" + "Tehtävät.txt");
+
+        readonly int resetNotificationHours = 12;
 
         private int ticks = 0;
         private double overallTime = 0.0;
@@ -34,11 +37,21 @@ namespace HowMuchDidIWork
             taskStartTimeTextBox.Text = KiminTyotuntilaskuri.Properties.Settings.Default.StartTimeText;
             taskEndTimeTextBox.Text = KiminTyotuntilaskuri.Properties.Settings.Default.EndTimeText;
             taskDescriptionTextBox.Text = KiminTyotuntilaskuri.Properties.Settings.Default.DescriptionText;
-            overallHoursValueLabel.Text = $"{KiminTyotuntilaskuri.Properties.Settings.Default.OverallTime}h";
+            overallHoursValueLabel.Text = $"{KiminTyotuntilaskuri.Properties.Settings.Default.OverallTime}";
+
+            KiminTyotuntilaskuri.Properties.Settings.Default.ApplicationStartDate = DateTime.Now;
 
             ResetDisplayInfo();
 
             UpdateTaskDisplayWithFileData();
+
+            if (KiminTyotuntilaskuri.Properties.Settings.Default.ApplicationStartDate > KiminTyotuntilaskuri.Properties.Settings.Default.ApplicationStopDate.AddHours(resetNotificationHours))
+            {
+                if (MessageBox.Show($"Käytit sovellusta viimeksi yli {resetNotificationHours} tuntia sitten.\nHaluatko aloittaa suoraan uuden päivän (varmuuskopio luodaan)?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    StartNewDay();
+                }
+            }
         }
 
         private void Form_Closing(object sender, FormClosingEventArgs e)
@@ -47,7 +60,9 @@ namespace HowMuchDidIWork
             KiminTyotuntilaskuri.Properties.Settings.Default.StartTimeText = taskStartTimeTextBox.Text;
             KiminTyotuntilaskuri.Properties.Settings.Default.EndTimeText = taskEndTimeTextBox.Text;
             KiminTyotuntilaskuri.Properties.Settings.Default.DescriptionText = taskDescriptionTextBox.Text;
-            KiminTyotuntilaskuri.Properties.Settings.Default.OverallTime = Convert.ToDouble(overallHoursValueLabel.Text.Substring(0, overallHoursValueLabel.Text.IndexOf('h')).Replace('.', ','));
+            KiminTyotuntilaskuri.Properties.Settings.Default.OverallTime = Convert.ToDouble(overallHoursValueLabel.Text);
+
+            KiminTyotuntilaskuri.Properties.Settings.Default.ApplicationStopDate = DateTime.Now;
 
             KiminTyotuntilaskuri.Properties.Settings.Default.Save();
         }
@@ -92,7 +107,7 @@ namespace HowMuchDidIWork
 
                     overallTime += totalTime ?? 0.0;
 
-                    overallHoursValueLabel.Text = $"{overallTime}h";
+                    overallHoursValueLabel.Text = $"{overallTime}";
                 }
                 else
                 {
@@ -213,19 +228,17 @@ namespace HowMuchDidIWork
             MakeNewTask(taskStartTimeTextBox.Text, taskEndTimeTextBox.Text, taskDescriptionTextBox.Text);
         }
 
-        private void resetCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void startNewDayCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (resetCheckBox.Checked)
+            if (startNewDayCheckBox.Checked)
             {
-                if (MessageBox.Show("Oletko varma, että haluat pyyhkiä historian (tiedosto myös pyyhitään)?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Oletko varma, että haluat aloittaa uuden päivän (varmuuskopio luodaan)?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    ClearTasksFileAndTaskDisplay();
-
-                    DisplayInfo("Pyyhit onnistuneesti tehtävähistoriasi", InfoType.Normal);
+                    StartNewDay();
                 }
             }
 
-            resetCheckBox.Checked = false;
+            startNewDayCheckBox.Checked = false;
         }
 
         private void DisplayInfo(string info, InfoType infoType) // Tätä voisi kehittää myöhemmin eteenpäin?
@@ -335,17 +348,29 @@ namespace HowMuchDidIWork
             {
                 if (MessageBox.Show("Oletko varma, että haluat pyyhkiä kaiken?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    taskStartTimeTextBox.Text = "";
-                    taskEndTimeTextBox.Text = "";
-                    taskDescriptionTextBox.Text = "";
-
-                    ClearTasksFileAndTaskDisplay();
-
-                    overallHoursValueLabel.Text = "0h";
+                    ResetAll();
                 }
             }
 
             resetAllCheckBox.Checked = false;
+        }
+
+        private void ResetAll()
+        {
+            taskStartTimeTextBox.Text = "";
+            taskEndTimeTextBox.Text = "";
+            taskDescriptionTextBox.Text = "";
+
+            ClearTasksFileAndTaskDisplay();
+
+            overallHoursValueLabel.Text = "0";
+        }
+
+        private void StartNewDay()
+        {
+            File.WriteAllText(tasksFilePath.Replace(".txt", " ") + $"{DateTime.Now.ToString("G").Replace('.', '-')}.txt", File.ReadAllText(tasksFilePath));
+
+            ResetAll();
         }
 
         private void NewConsoleCommandLine(string line)

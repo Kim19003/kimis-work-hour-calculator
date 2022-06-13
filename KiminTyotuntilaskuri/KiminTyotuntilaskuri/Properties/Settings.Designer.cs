@@ -82,5 +82,27 @@ namespace KiminTyotuntilaskuri.Properties {
                 this["OverallTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime ApplicationStartDate {
+            get {
+                return ((global::System.DateTime)(this["ApplicationStartDate"]));
+            }
+            set {
+                this["ApplicationStartDate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime ApplicationStopDate {
+            get {
+                return ((global::System.DateTime)(this["ApplicationStopDate"]));
+            }
+            set {
+                this["ApplicationStopDate"] = value;
+            }
+        }
     }
 }
