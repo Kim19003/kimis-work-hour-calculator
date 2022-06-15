@@ -244,7 +244,7 @@
             // 
             this.taskDescriptionTextBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.taskDescriptionTextBox.Location = new System.Drawing.Point(59, 94);
-            this.taskDescriptionTextBox.MaxLength = 60;
+            this.taskDescriptionTextBox.MaxLength = 180;
             this.taskDescriptionTextBox.Name = "taskDescriptionTextBox";
             this.taskDescriptionTextBox.Size = new System.Drawing.Size(338, 26);
             this.taskDescriptionTextBox.TabIndex = 4;

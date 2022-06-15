@@ -20,3 +20,14 @@ C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\KiminTyotuntilaskuri\KiminTyotunti
 C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.exe
 C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.pdb
 C:\Users\kimie\OneDrive\Tiedostot\GitHub\tpls\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.csproj.AssemblyReference.cache
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\bin\Debug\KiminTyotuntilaskuri.exe.config
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\bin\Debug\KiminTyotuntilaskuri.exe
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\bin\Debug\KiminTyotuntilaskuri.pdb
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.csproj.AssemblyReference.cache
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.csproj.SuggestedBindingRedirects.cache
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\HowMuchDidIWork.Form1.resources
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.Properties.Resources.resources
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.csproj.GenerateResource.cache
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.csproj.CoreCompileInputs.cache
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.exe
+D:\stuff\- GITHUB -\kimintyotuntilaskuri\KiminTyotuntilaskuri\KiminTyotuntilaskuri\obj\Debug\KiminTyotuntilaskuri.pdb
