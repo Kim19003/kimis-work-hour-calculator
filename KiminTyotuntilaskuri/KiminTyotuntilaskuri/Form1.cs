@@ -47,9 +47,12 @@ namespace HowMuchDidIWork
 
             if (KiminTyotuntilaskuri.Properties.Settings.Default.ApplicationStartDate > KiminTyotuntilaskuri.Properties.Settings.Default.ApplicationStopDate.AddHours(resetNotificationHours))
             {
-                if (MessageBox.Show($"Käytit sovellusta viimeksi yli {resetNotificationHours} tuntia sitten.\nHaluatko aloittaa suoraan uuden päivän (varmuuskopio luodaan)?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (tasksDisplayRichTextBox.Text.Length > 0)
                 {
-                    StartNewDay();
+                    if (MessageBox.Show($"Käytit sovellusta viimeksi yli {resetNotificationHours} tuntia sitten.\nHaluatko aloittaa suoraan uuden päivän?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        StartNewDay();
+                    }
                 }
             }
         }
@@ -232,7 +235,7 @@ namespace HowMuchDidIWork
         {
             if (startNewDayCheckBox.Checked)
             {
-                if (MessageBox.Show("Oletko varma, että haluat aloittaa uuden päivän (varmuuskopio luodaan)?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Oletko varma, että haluat aloittaa uuden päivän?", appName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     StartNewDay();
                 }
@@ -371,6 +374,26 @@ namespace HowMuchDidIWork
             File.WriteAllText(tasksFilePath.Replace(".txt", " ") + $"{DateTime.Now.ToString("G").Replace('.', '-')}.txt", File.ReadAllText(tasksFilePath));
 
             ResetAll();
+        }
+
+        private void tasksDisplayRichTextBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                try
+                {
+                    int charAtPosition = tasksDisplayRichTextBox.GetCharIndexFromPosition(e.Location);
+                    int lineAtPosition = tasksDisplayRichTextBox.GetLineFromCharIndex(charAtPosition);
+
+                    string parsedHours = tasksDisplayRichTextBox.Lines[lineAtPosition].Substring(tasksDisplayRichTextBox.Lines[lineAtPosition].IndexOf('(') + 1);
+                    parsedHours = parsedHours.Substring(0, parsedHours.IndexOf(" tuntia)"));
+
+                    Clipboard.SetText(parsedHours);
+                }
+                catch
+                {
+                }
+            }
         }
 
         private void NewConsoleCommandLine(string line)

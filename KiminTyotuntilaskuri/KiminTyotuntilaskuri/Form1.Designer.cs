@@ -200,7 +200,7 @@
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(452, 23);
             this.infoLabel.TabIndex = 7;
-            this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.infoLabel.Visible = false;
             // 
             // startNewDayCheckBox
@@ -226,6 +226,7 @@
             this.tasksDisplayRichTextBox.TabIndex = 6;
             this.tasksDisplayRichTextBox.Text = "";
             this.tasksDisplayRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tasksDisplayRichTextBox_KeyDown);
+            this.tasksDisplayRichTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tasksDisplayRichTextBox_MouseDown);
             // 
             // addTaskButton
             // 
